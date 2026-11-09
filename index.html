@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Acquisition criteria — Adam Klenk</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+:root{--ink:#0f0e0c;--gold:#c9a84c;--muted:#6b6660;--bg:#f6f3ec;--card:#fff;--border:#e4dfd4;--rust:#b85c38}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 60px}
+header{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}header h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:28px;margin:0;color:var(--gold)}header small{color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+p.lead{color:var(--muted);margin:0 0 22px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 18px 8px;margin-bottom:16px}
+h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.row{grid-template-columns:1fr}}
+.f{margin-bottom:12px}.f label.t{display:block;font-size:12px;font-weight:600;margin-bottom:4px}
+input[type=text],input[type=email],input[type=tel],input[type=date],textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font:inherit;background:#fff}
+textarea{min-height:90px;resize:vertical}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;background:#fff;font-size:14px}
+.pill input{margin:0}.pill:has(input:checked){background:rgba(201,168,76,.18);border-color:var(--gold)}
+.help{font-size:12.5px;color:var(--muted);margin:-6px 0 12px}
+button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}button:disabled{opacity:.6;cursor:default}
+.err{background:rgba(184,92,56,.1);border:1px solid var(--rust);color:#7a3a20;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none}
+.done{display:none;text-align:center;padding:40px 10px}.done h2{font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink);font-family:Georgia,serif;font-weight:400}
+.hp{position:absolute;left:-9999px;top:-9999px}
+.req{color:var(--rust)}
+</style></head><body><div class="wrap">
+<header><h1>Conclave</h1><small>Adam Klenk · Northmarq</small></header>
+<p class="lead">Tell me what you're looking to buy and I'll keep you in mind as opportunities come up. Takes about two minutes. Fill in what applies; leave the rest blank.</p>
+<form id="f" novalidate="novalidate">
+<div class="err" id="err"></div>
+<div class="card"><h2>About you</h2>
+ <div class="row"><div class="f"><label class="t">Your name <span class="req">*</span></label><input type="text" name="name" required="required" maxlength="120" autocomplete="name" /></div>
+ <div class="f"><label class="t">Company <span class="req">*</span></label><input type="text" name="company" required="required" maxlength="160" autocomplete="organization" /></div></div>
+ <div class="row"><div class="f"><label class="t">Email <span class="req">*</span></label><input type="email" name="email" required="required" maxlength="200" autocomplete="email" /></div>
+ <div class="f"><label class="t">Phone</label><input type="tel" name="phone" maxlength="40" autocomplete="tel" /></div></div>
+ <div class="f"><label class="t">Title</label><input type="text" name="title" maxlength="120" autocomplete="organization-title" /></div>
+ <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website2" tabindex="-1" autocomplete="off" /></label></div>
+</div>
+<div class="card"><h2>Existing apartments</h2><div class="pills"><label class="pill"><input type="checkbox" name="existingTypes" value="Highrise" /><span>Highrise</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Value-Add" /><span>Value-Add</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="2010+" /><span>2010+</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Core" /><span>Core</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Core+" /><span>Core+</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Lease-Up/Pre-Sale" /><span>Lease-Up/Pre-Sale</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Everything" /><span>Everything</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="BTR" /><span>BTR</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Motel Conversion" /><span>Motel Conversion</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Affordable" /><span>Affordable</span></label></div><div class="help">Tick the kinds of deals you'd look at. "Everything" means any existing apartment deal.</div></div>
+<div class="card"><h2>Land</h2><div class="pills"><label class="pill"><input type="checkbox" name="landTypes" value="Market" /><span>Market</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Affordable" /><span>Affordable</span></label><label class="pill"><input type="checkbox" name="landTypes" value="GP Interest" /><span>GP Interest</span></label><label class="pill"><input type="checkbox" name="landTypes" value="BTR" /><span>BTR</span></label><label class="pill"><input type="checkbox" name="landTypes" value="TH (Retail)" /><span>TH (Retail)</span></label><label class="pill"><input type="checkbox" name="landTypes" value="SFR (Retail)" /><span>SFR (Retail)</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Quick Close" /><span>Quick Close</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Active Adult" /><span>Active Adult</span></label><label class="pill"><input type="checkbox" name="landTypes" value="OZ - Opportunity Zone" /><span>OZ - Opportunity Zone</span></label></div><div class="help">Tick the kinds of land deals you'd look at.</div></div>
+<div class="card"><h2>Where</h2><div class="pills"><label class="pill"><input type="checkbox" name="states" value="TN" /><span>TN</span></label><label class="pill"><input type="checkbox" name="states" value="AL" /><span>AL</span></label><label class="pill"><input type="checkbox" name="states" value="KY" /><span>KY</span></label><label class="pill"><input type="checkbox" name="states" value="GA" /><span>GA</span></label><label class="pill"><input type="checkbox" name="states" value="NC" /><span>NC</span></label><label class="pill"><input type="checkbox" name="states" value="SC" /><span>SC</span></label><label class="pill"><input type="checkbox" name="states" value="MS" /><span>MS</span></label><label class="pill"><input type="checkbox" name="states" value="FL" /><span>FL</span></label><label class="pill"><input type="checkbox" name="states" value="VA" /><span>VA</span></label><label class="pill"><input type="checkbox" name="states" value="AR" /><span>AR</span></label><label class="pill"><input type="checkbox" name="states" value="LA" /><span>LA</span></label><label class="pill"><input type="checkbox" name="states" value="TX" /><span>TX</span></label></div>
+ <div class="row"><div class="f"><label class="t">Other states</label><input type="text" name="statesOther" placeholder="e.g. OH, IN" /></div><div class="f"><label class="t">Cities / markets</label><input type="text" name="cities" placeholder="e.g. Nashville, Huntsville" /></div></div></div>
+<div class="card"><h2>Size and price</h2>
+ <div class="row"><div class="f"><label class="t">Units — minimum</label><input type="text" name="unitsMin" inputmode="numeric" placeholder="e.g. 100" /></div><div class="f"><label class="t">Units — maximum</label><input type="text" name="unitsMax" inputmode="numeric" placeholder="e.g. 400" /></div></div>
+ <div class="row"><div class="f"><label class="t">Price — minimum ($)</label><input type="text" name="priceMin" inputmode="numeric" placeholder="e.g. 10,000,000" /></div><div class="f"><label class="t">Price — maximum ($)</label><input type="text" name="priceMax" inputmode="numeric" placeholder="e.g. 60,000,000" /></div></div>
+ <div class="row"><div class="f"><label class="t">Year built — from</label><input type="text" name="yearMin" inputmode="numeric" placeholder="e.g. 1990" /></div><div class="f"><label class="t">Year built — to</label><input type="text" name="yearMax" inputmode="numeric" placeholder="e.g. 2025" /></div></div>
+ <div class="row"><div class="f"><label class="t">Typical equity check ($)</label><input type="text" name="equityCheck" inputmode="numeric" placeholder="e.g. 5,000,000" /></div>
+ <div class="f"><label class="t">1031 exchange</label><label class="pill"><input type="checkbox" name="is1031" /><span>I'm in a 1031 exchange</span></label> <input type="date" name="deadline1031" style="width:auto;margin-left:8px" title="1031 deadline" /></div></div></div>
+<div class="card"><h2>Anything else</h2><div class="f"><textarea name="notes" maxlength="4000" placeholder="Deal types to avoid, preferred submarkets, timing, who else to copy…"></textarea></div></div>
+<button type="submit" id="go">Send to Adam Klenk</button>
+</form>
+<div class="done" id="done"><h2>Thank you — got it.</h2><p>I'll keep your criteria on file and reach out when something fits. — Adam Klenk</p></div>
+</div>
+<script>//<![CDATA[
+(function(){
+ var t0=Date.now(), f=document.getElementById('f'), err=document.getElementById('err'), go=document.getElementById('go');
+ function val(n){var e=f.elements[n];return e?e.value:'';}
+ function checks(n){return Array.prototype.slice.call(f.querySelectorAll('input[name="'+n+'"]:checked')).map(function(x){return x.value;});}
+ f.addEventListener('submit',function(ev){ev.preventDefault();err.style.display='none';
+  var states=checks('states').concat(val('statesOther').toUpperCase().split(/[\s,;]+/).filter(Boolean));
+  var body={name:val('name'),company:val('company'),email:val('email'),phone:val('phone'),title:val('title'),website2:val('website2'),
+   existingTypes:checks('existingTypes'),landTypes:checks('landTypes'),states:states,cities:val('cities'),unitsMin:val('unitsMin'),unitsMax:val('unitsMax'),
+   priceMin:val('priceMin'),priceMax:val('priceMax'),yearMin:val('yearMin'),yearMax:val('yearMax'),equityCheck:val('equityCheck'),
+   is1031:!!f.querySelector('input[name="is1031"]:checked'),deadline1031:val('deadline1031'),notes:val('notes'),t:Date.now()-t0};
+  go.disabled=true;go.textContent='Sending…';
+  fetch("https://vfnqwmryzqvwjzkguuqm.supabase.co/functions/v1/criteria-form?k=f63991666a4d4fa2abcfe018f2825424"||location.href,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {ok:r.ok,j:j};});})
+  .then(function(x){ if(x.ok&&x.j&&x.j.ok){f.style.display='none';document.getElementById('done').style.display='block';window.scrollTo(0,0);}
+   else{err.textContent=(x.j&&x.j.message)||'Something went wrong — please try again.';err.style.display='block';go.disabled=false;go.textContent='Send to Adam Klenk';window.scrollTo(0,0);} })
+  .catch(function(){err.textContent='Could not send — please check your connection and try again.';err.style.display='block';go.disabled=false;go.textContent='Send to Adam Klenk';});
+ });
+})();
+//]]></script></body></html>

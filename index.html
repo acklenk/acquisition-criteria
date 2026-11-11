@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Acquisition criteria — Adam Klenk</title>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Acquisition criteria &#8212; Adam Klenk</title>
 <meta name="robots" content="noindex,nofollow" />
 <style>
 :root{--ink:#0f0e0c;--gold:#c9a84c;--muted:#6b6660;--bg:#f6f3ec;--card:#fff;--border:#e4dfd4;--rust:#b85c38}
@@ -10,6 +10,7 @@ header{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}header h1{fo
 p.lead{color:var(--muted);margin:0 0 22px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 18px 8px;margin-bottom:16px}
 h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+h3{font-size:12px;font-weight:600;margin:16px 0 6px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.row{grid-template-columns:1fr}}
 .f{margin-bottom:12px}.f label.t{display:block;font-size:12px;font-weight:600;margin-bottom:4px}
 input[type=text],input[type=email],input[type=tel],input[type=date],textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font:inherit;background:#fff}
@@ -17,55 +18,234 @@ textarea{min-height:90px;resize:vertical}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:999px;padding:6px 12px;cursor:pointer;background:#fff;font-size:14px}
 .pill input{margin:0}.pill:has(input:checked){background:rgba(201,168,76,.18);border-color:var(--gold)}
 .help{font-size:12.5px;color:var(--muted);margin:-6px 0 12px}
+.defs{font-size:12.5px;color:var(--muted);margin:-4px 0 14px;padding-left:0;list-style:none}.defs li{margin-bottom:3px}.defs b{color:var(--ink);font-weight:600}
+.mkt{border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.mkt-scope{display:none;gap:16px;margin:9px 0 0 4px;font-size:13.5px;color:var(--muted);flex-wrap:wrap}
+.mkt-list{display:none;flex-wrap:wrap;gap:7px;margin:9px 0 2px 4px}
+.mkt:has(.mkt-chk:checked) .mkt-scope{display:flex}
+.mkt:has(.scope-sel:checked) .mkt-list{display:flex}
+.mkt:has(.mkt-chk:checked){border-color:var(--gold);background:rgba(201,168,76,.06)}
+.mkt-scope label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.mk{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--border);border-radius:999px;padding:4px 10px;cursor:pointer;background:#fff;font-size:13px}
+.mk input{margin:0}.mk:has(input:checked){background:rgba(201,168,76,.18);border-color:var(--gold)}
+.money{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:8px;background:#fff;overflow:hidden}
+.money:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+.money .pre,.money .suf{display:flex;align-items:center;padding:0 11px;color:var(--muted);background:#faf8f4;font-size:14px;white-space:nowrap}
+.money .pre{border-right:1px solid var(--border);font-weight:600;color:var(--ink)}
+.money .suf{border-left:1px solid var(--border)}
+.money input{border:0;border-radius:0;box-shadow:none;text-align:right;min-width:0}
+.money input:focus{outline:none}
+.echo{font-size:12.5px;color:var(--muted);margin:-6px 0 12px;min-height:19px}.echo b{color:var(--ink);font-weight:600}
+.sec{border-left:3px solid var(--gold);padding-left:10px;margin:0 0 12px}.sec b{display:block;font-size:15px}.sec span{font-size:12.5px;color:var(--muted)}
 button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}button:disabled{opacity:.6;cursor:default}
 .err{background:rgba(184,92,56,.1);border:1px solid var(--rust);color:#7a3a20;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none}
 .done{display:none;text-align:center;padding:40px 10px}.done h2{font-size:22px;letter-spacing:0;text-transform:none;color:var(--ink);font-family:Georgia,serif;font-weight:400}
 .hp{position:absolute;left:-9999px;top:-9999px}
 .req{color:var(--rust)}
 </style></head><body><div class="wrap">
-<header><h1>Conclave</h1><small>Adam Klenk · Northmarq</small></header>
+<header><h1>Acquisition criteria</h1><small>Adam Klenk &#183; Northmarq</small></header>
 <p class="lead">Tell me what you're looking to buy and I'll keep you in mind as opportunities come up. Takes about two minutes. Fill in what applies; leave the rest blank.</p>
-<form id="f" novalidate="novalidate">
+<form id="f">
 <div class="err" id="err"></div>
 <div class="card"><h2>About you</h2>
- <div class="row"><div class="f"><label class="t">Your name <span class="req">*</span></label><input type="text" name="name" required="required" maxlength="120" autocomplete="name" /></div>
- <div class="f"><label class="t">Company <span class="req">*</span></label><input type="text" name="company" required="required" maxlength="160" autocomplete="organization" /></div></div>
- <div class="row"><div class="f"><label class="t">Email <span class="req">*</span></label><input type="email" name="email" required="required" maxlength="200" autocomplete="email" /></div>
+ <div class="row"><div class="f"><label class="t">Your name <span class="req">*</span></label><input type="text" name="name" maxlength="120" autocomplete="name" /></div>
+ <div class="f"><label class="t">Company <span class="req">*</span></label><input type="text" name="company" maxlength="160" autocomplete="organization" /></div></div>
+ <div class="row"><div class="f"><label class="t">Email <span class="req">*</span></label><input type="email" name="email" maxlength="200" autocomplete="email" /></div>
  <div class="f"><label class="t">Phone</label><input type="tel" name="phone" maxlength="40" autocomplete="tel" /></div></div>
  <div class="f"><label class="t">Title</label><input type="text" name="title" maxlength="120" autocomplete="organization-title" /></div>
  <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website2" tabindex="-1" autocomplete="off" /></label></div>
 </div>
-<div class="card"><h2>Existing apartments</h2><div class="pills"><label class="pill"><input type="checkbox" name="existingTypes" value="Highrise" /><span>Highrise</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Value-Add" /><span>Value-Add</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="2010+" /><span>2010+</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Core" /><span>Core</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Core+" /><span>Core+</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Lease-Up/Pre-Sale" /><span>Lease-Up/Pre-Sale</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Everything" /><span>Everything</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="BTR" /><span>BTR</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Motel Conversion" /><span>Motel Conversion</span></label><label class="pill"><input type="checkbox" name="existingTypes" value="Affordable" /><span>Affordable</span></label></div><div class="help">Tick the kinds of deals you'd look at. "Everything" means any existing apartment deal.</div></div>
-<div class="card"><h2>Land</h2><div class="pills"><label class="pill"><input type="checkbox" name="landTypes" value="Market" /><span>Market</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Affordable" /><span>Affordable</span></label><label class="pill"><input type="checkbox" name="landTypes" value="GP Interest" /><span>GP Interest</span></label><label class="pill"><input type="checkbox" name="landTypes" value="BTR" /><span>BTR</span></label><label class="pill"><input type="checkbox" name="landTypes" value="TH (Retail)" /><span>TH (Retail)</span></label><label class="pill"><input type="checkbox" name="landTypes" value="SFR (Retail)" /><span>SFR (Retail)</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Quick Close" /><span>Quick Close</span></label><label class="pill"><input type="checkbox" name="landTypes" value="Active Adult" /><span>Active Adult</span></label><label class="pill"><input type="checkbox" name="landTypes" value="OZ - Opportunity Zone" /><span>OZ - Opportunity Zone</span></label></div><div class="help">Tick the kinds of land deals you'd look at.</div></div>
-<div class="card"><h2>Where</h2><div class="pills"><label class="pill"><input type="checkbox" name="states" value="TN" /><span>TN</span></label><label class="pill"><input type="checkbox" name="states" value="AL" /><span>AL</span></label><label class="pill"><input type="checkbox" name="states" value="KY" /><span>KY</span></label><label class="pill"><input type="checkbox" name="states" value="GA" /><span>GA</span></label><label class="pill"><input type="checkbox" name="states" value="NC" /><span>NC</span></label><label class="pill"><input type="checkbox" name="states" value="SC" /><span>SC</span></label><label class="pill"><input type="checkbox" name="states" value="MS" /><span>MS</span></label><label class="pill"><input type="checkbox" name="states" value="FL" /><span>FL</span></label><label class="pill"><input type="checkbox" name="states" value="VA" /><span>VA</span></label><label class="pill"><input type="checkbox" name="states" value="AR" /><span>AR</span></label><label class="pill"><input type="checkbox" name="states" value="LA" /><span>LA</span></label><label class="pill"><input type="checkbox" name="states" value="TX" /><span>TX</span></label></div>
- <div class="row"><div class="f"><label class="t">Other states</label><input type="text" name="statesOther" placeholder="e.g. OH, IN" /></div><div class="f"><label class="t">Cities / markets</label><input type="text" name="cities" placeholder="e.g. Nashville, Huntsville" /></div></div></div>
-<div class="card"><h2>Size and price</h2>
- <div class="row"><div class="f"><label class="t">Units — minimum</label><input type="text" name="unitsMin" inputmode="numeric" placeholder="e.g. 100" /></div><div class="f"><label class="t">Units — maximum</label><input type="text" name="unitsMax" inputmode="numeric" placeholder="e.g. 400" /></div></div>
- <div class="row"><div class="f"><label class="t">Price — minimum ($)</label><input type="text" name="priceMin" inputmode="numeric" placeholder="e.g. 10,000,000" /></div><div class="f"><label class="t">Price — maximum ($)</label><input type="text" name="priceMax" inputmode="numeric" placeholder="e.g. 60,000,000" /></div></div>
- <div class="row"><div class="f"><label class="t">Year built — from</label><input type="text" name="yearMin" inputmode="numeric" placeholder="e.g. 1990" /></div><div class="f"><label class="t">Year built — to</label><input type="text" name="yearMax" inputmode="numeric" placeholder="e.g. 2025" /></div></div>
- <div class="row"><div class="f"><label class="t">Typical equity check ($)</label><input type="text" name="equityCheck" inputmode="numeric" placeholder="e.g. 5,000,000" /></div>
- <div class="f"><label class="t">1031 exchange</label><label class="pill"><input type="checkbox" name="is1031" /><span>I'm in a 1031 exchange</span></label> <input type="date" name="deadline1031" style="width:auto;margin-left:8px" title="1031 deadline" /></div></div></div>
-<div class="card"><h2>Anything else</h2><div class="f"><textarea name="notes" maxlength="4000" placeholder="Deal types to avoid, preferred submarkets, timing, who else to copy…"></textarea></div></div>
-<button type="submit" id="go">Send to Adam Klenk</button>
-</form>
-<div class="done" id="done"><h2>Thank you — got it.</h2><p>I'll keep your criteria on file and reach out when something fits. — Adam Klenk</p></div>
+
+<div class="card">
+ <div class="sec"><b>1 &#183; Existing Multifamily Acquisitions</b><span>Leave this section blank if you only look at land.</span></div>
+ <h3>Class</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="exClass" value="A" /><span>A</span></label>
+  <label class="pill"><input type="checkbox" name="exClass" value="B" /><span>B</span></label>
+  <label class="pill"><input type="checkbox" name="exClass" value="C" /><span>C</span></label>
+ </div>
+ <h3>Strategy</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="exStrategy" value="Core" /><span>Core</span></label>
+  <label class="pill"><input type="checkbox" name="exStrategy" value="Core-Plus" /><span>Core-Plus</span></label>
+  <label class="pill"><input type="checkbox" name="exStrategy" value="Value-Add" /><span>Value-Add</span></label>
+  <label class="pill"><input type="checkbox" name="exStrategy" value="Opportunistic" /><span>Opportunistic</span></label>
+  <label class="pill"><input type="checkbox" name="exStrategy" value="Lease-Up/Pre-Sale" /><span>Lease-Up/Pre-Sale</span></label>
+ </div>
+ <ul class="defs">
+  <li><b>Core</b> &#8212; Stabilised, high-quality assets with predictable cash flow.</li>
+  <li><b>Core-Plus</b> &#8212; Stabilised or near-stabilised, with modest upside through light renovations or operational improvements.</li>
+  <li><b>Value-Add</b> &#8212; Clear opportunities to increase NOI via renovations, operations, lease-up, or marking rents to market.</li>
+  <li><b>Opportunistic</b> &#8212; Higher risk: distressed assets, heavy repositioning, or significant lease-up.</li>
+  <li><b>Lease-Up/Pre-Sale</b> &#8212; Newly built or still leasing up, bought before stabilisation.</li>
+ </ul>
+ <h3>Size, price and vintage</h3>
+ <div class="row"><div class="f"><label class="t">Units &#8212; minimum</label><input type="text" name="unitsMin" inputmode="numeric" placeholder="e.g. 100" /></div>
+ <div class="f"><label class="t">Units &#8212; maximum</label><input type="text" name="unitsMax" inputmode="numeric" placeholder="e.g. 400" /></div></div>
+ <div class="row"><div class="f"><label class="t">Price &#8212; minimum</label>
+   <div class="money"><span class="pre">$</span><input type="text" name="priceMinM" inputmode="decimal" placeholder="10" /><span class="suf">million</span></div></div>
+  <div class="f"><label class="t">Price &#8212; maximum</label>
+   <div class="money"><span class="pre">$</span><input type="text" name="priceMaxM" inputmode="decimal" placeholder="60" /><span class="suf">million</span></div></div></div>
+ <div class="echo" id="priceEcho"></div>
+ <div class="row"><div class="f"><label class="t">Year built &#8212; from</label><input type="text" name="yearMin" inputmode="numeric" placeholder="e.g. 1990" /></div>
+ <div class="f"><label class="t">Year built &#8212; to</label><input type="text" name="yearMax" inputmode="numeric" placeholder="e.g. 2025" /></div></div>
+ <h3>Property type</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="exType" value="Garden" /><span>Garden</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Mid-Rise" /><span>Mid-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="High-Rise" /><span>High-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="BTR" /><span>BTR</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Affordable" /><span>Affordable</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Motel Conversion" /><span>Motel Conversion</span></label>
+ </div>
+ <h3>Markets</h3>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="exState" value="TN" /><span>Tennessee</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="exScopeTN" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="exScopeTN" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="exMktTN" value="Nashville" /><span>Nashville</span></label>
+     <label class="mk"><input type="checkbox" name="exMktTN" value="Knoxville" /><span>Knoxville</span></label>
+     <label class="mk"><input type="checkbox" name="exMktTN" value="Chattanooga" /><span>Chattanooga</span></label>
+     <label class="mk"><input type="checkbox" name="exMktTN" value="Memphis" /><span>Memphis</span></label>
+     <label class="mk"><input type="checkbox" name="exMktTN" value="Tri-Cities" /><span>Tri-Cities</span></label>
+   </div>
+ </div>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="exState" value="KY" /><span>Kentucky</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="exScopeKY" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="exScopeKY" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="exMktKY" value="Louisville" /><span>Louisville</span></label>
+     <label class="mk"><input type="checkbox" name="exMktKY" value="Lexington" /><span>Lexington</span></label>
+   </div>
+ </div>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="exState" value="AL" /><span>Alabama</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="exScopeAL" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="exScopeAL" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="exMktAL" value="Birmingham" /><span>Birmingham</span></label>
+     <label class="mk"><input type="checkbox" name="exMktAL" value="Huntsville" /><span>Huntsville</span></label>
+   </div>
+ </div>
+ <h3>Opportunity Zone</h3>
+ <div class="pills"><label class="pill"><input type="checkbox" name="exOZ" value="yes" /><span>Yes</span></label></div>
+ <div class="f"><label class="t">Anything else</label><textarea name="exOther" placeholder="Occupancy, upside, deal-breakers, anything that helps me match you."></textarea></div>
 </div>
-<script>//<![CDATA[
+
+<div class="card">
+ <div class="sec"><b>2 &#183; Land / Development</b><span>Leave this section blank if you only buy existing.</span></div>
+ <h3>Product type</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="laType" value="Garden" /><span>Garden</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="Mid-Rise" /><span>Mid-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="High-Rise" /><span>High-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="BTR" /><span>BTR</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="Affordable" /><span>Affordable</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="TH (Retail)" /><span>TH (Retail)</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="SFR (Retail)" /><span>SFR (Retail)</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="Active Adult/Seniors" /><span>Active Adult/Seniors</span></label>
+  <label class="pill"><input type="checkbox" name="laType" value="Quick Close" /><span>Quick Close</span></label>
+ </div>
+ <h3>Markets</h3>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="laState" value="TN" /><span>Tennessee</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="laScopeTN" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="laScopeTN" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="laMktTN" value="Nashville" /><span>Nashville</span></label>
+     <label class="mk"><input type="checkbox" name="laMktTN" value="Knoxville" /><span>Knoxville</span></label>
+     <label class="mk"><input type="checkbox" name="laMktTN" value="Chattanooga" /><span>Chattanooga</span></label>
+     <label class="mk"><input type="checkbox" name="laMktTN" value="Memphis" /><span>Memphis</span></label>
+     <label class="mk"><input type="checkbox" name="laMktTN" value="Tri-Cities" /><span>Tri-Cities</span></label>
+   </div>
+ </div>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="laState" value="KY" /><span>Kentucky</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="laScopeKY" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="laScopeKY" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="laMktKY" value="Louisville" /><span>Louisville</span></label>
+     <label class="mk"><input type="checkbox" name="laMktKY" value="Lexington" /><span>Lexington</span></label>
+   </div>
+ </div>
+ <div class="mkt">
+   <label class="pill"><input type="checkbox" class="mkt-chk" name="laState" value="AL" /><span>Alabama</span></label>
+   <div class="mkt-scope">
+     <label><input type="radio" class="scope-all" name="laScopeAL" value="entire" checked="checked" /> Entire state</label>
+     <label><input type="radio" class="scope-sel" name="laScopeAL" value="selected" /> Selected markets only</label>
+   </div>
+   <div class="mkt-list">
+     <label class="mk"><input type="checkbox" name="laMktAL" value="Birmingham" /><span>Birmingham</span></label>
+     <label class="mk"><input type="checkbox" name="laMktAL" value="Huntsville" /><span>Huntsville</span></label>
+   </div>
+ </div>
+ <h3>Opportunity Zone</h3>
+ <div class="pills"><label class="pill"><input type="checkbox" name="laOZ" value="yes" /><span>Yes</span></label></div>
+</div>
+
+<div class="card"><h2>1031 exchange</h2>
+ <div class="pills"><label class="pill"><input type="checkbox" name="is1031" /><span>I'm in a 1031 exchange</span></label></div>
+ <div class="f" style="max-width:320px"><label class="t">45-day identification end date</label><input type="date" name="deadline1031" /></div>
+ <div class="help">The last day you can identify replacement property.</div>
+</div>
+
+<p><button type="submit" id="send">Send</button></p>
+</form>
+<div class="done" id="done"><h2>Thank you &#8212; got it.</h2><p class="lead">I'll be in touch when something fits.</p></div>
+</div>
+<script type="text/javascript">/*<![CDATA[*/
 (function(){
- var t0=Date.now(), f=document.getElementById('f'), err=document.getElementById('err'), go=document.getElementById('go');
- function val(n){var e=f.elements[n];return e?e.value:'';}
- function checks(n){return Array.prototype.slice.call(f.querySelectorAll('input[name="'+n+'"]:checked')).map(function(x){return x.value;});}
- f.addEventListener('submit',function(ev){ev.preventDefault();err.style.display='none';
-  var states=checks('states').concat(val('statesOther').toUpperCase().split(/[\s,;]+/).filter(Boolean));
-  var body={name:val('name'),company:val('company'),email:val('email'),phone:val('phone'),title:val('title'),website2:val('website2'),
-   existingTypes:checks('existingTypes'),landTypes:checks('landTypes'),states:states,cities:val('cities'),unitsMin:val('unitsMin'),unitsMax:val('unitsMax'),
-   priceMin:val('priceMin'),priceMax:val('priceMax'),yearMin:val('yearMin'),yearMax:val('yearMax'),equityCheck:val('equityCheck'),
-   is1031:!!f.querySelector('input[name="is1031"]:checked'),deadline1031:val('deadline1031'),notes:val('notes'),t:Date.now()-t0};
-  go.disabled=true;go.textContent='Sending…';
-  fetch("https://vfnqwmryzqvwjzkguuqm.supabase.co/functions/v1/criteria-form?k=f63991666a4d4fa2abcfe018f2825424"||location.href,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {ok:r.ok,j:j};});})
-  .then(function(x){ if(x.ok&&x.j&&x.j.ok){f.style.display='none';document.getElementById('done').style.display='block';window.scrollTo(0,0);}
-   else{err.textContent=(x.j&&x.j.message)||'Something went wrong — please try again.';err.style.display='block';go.disabled=false;go.textContent='Send to Adam Klenk';window.scrollTo(0,0);} })
-  .catch(function(){err.textContent='Could not send — please check your connection and try again.';err.style.display='block';go.disabled=false;go.textContent='Send to Adam Klenk';});
+ var t0 = Date.now(), f = document.getElementById('f'), STATES = ["TN","KY","AL"];
+ function checks(n){ return Array.prototype.slice.call(f.querySelectorAll('input[name="'+n+'"]:checked')).map(function(x){return x.value;}); }
+ function val(n){ var e = f.elements[n]; return e ? String(e.value||'').trim() : ''; }
+ function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+ function echoPrice(){
+   var lo = parseFloat(String(val('priceMinM')).replace(/[^0-9.]/g,'')), hi = parseFloat(String(val('priceMaxM')).replace(/[^0-9.]/g,''));
+   var e = document.getElementById('priceEcho'), out = '';
+   if (!isNaN(lo) && !isNaN(hi)) out = 'That is <b>' + fmt(lo*1e6) + '</b> to <b>' + fmt(hi*1e6) + '</b>.';
+   else if (!isNaN(lo)) out = 'That is <b>' + fmt(lo*1e6) + '</b> and up.';
+   else if (!isNaN(hi)) out = 'Up to <b>' + fmt(hi*1e6) + '</b>.';
+   e.innerHTML = out;
+ }
+ f.priceMinM.addEventListener('input', echoPrice); f.priceMaxM.addEventListener('input', echoPrice);
+ function scopes(p){ var o = {}; STATES.forEach(function(st){ var r = f.querySelector('input[name="'+p+'Scope'+st+'"]:checked'); o[st] = r ? r.value : 'entire'; }); return o; }
+ function picks(p){ var o = {}; STATES.forEach(function(st){ o[st] = checks(p+'Mkt'+st); }); return o; }
+ f.addEventListener('submit', function(ev){
+   ev.preventDefault();
+   var err = document.getElementById('err'), btn = document.getElementById('send');
+   err.style.display = 'none';
+   var body = { name: val('name'), company: val('company'), email: val('email'), phone: val('phone'), title: val('title'),
+     website2: val('website2'),
+     exClass: checks('exClass'), exStrategy: checks('exStrategy'), exType: checks('exType'),
+     exState: checks('exState'), exScope: scopes('ex'), exMarkets: picks('ex'),
+     exOZ: !!f.querySelector('input[name="exOZ"]:checked'), exOther: val('exOther'),
+     laType: checks('laType'), laState: checks('laState'), laScope: scopes('la'), laMarkets: picks('la'),
+     laOZ: !!f.querySelector('input[name="laOZ"]:checked'),
+     unitsMin: val('unitsMin'), unitsMax: val('unitsMax'), priceMinM: val('priceMinM'), priceMaxM: val('priceMaxM'),
+     yearMin: val('yearMin'), yearMax: val('yearMax'),
+     is1031: !!f.querySelector('input[name="is1031"]:checked'), deadline1031: val('deadline1031'),
+     t: Date.now() - t0 };
+   btn.disabled = true;
+   fetch("https://vfnqwmryzqvwjzkguuqm.supabase.co/functions/v1/criteria-form?k=f63991666a4d4fa2abcfe018f2825424", { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+     .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+     .then(function(res){
+       if (res.ok) { f.style.display = 'none'; document.getElementById('done').style.display = 'block'; window.scrollTo(0,0); }
+       else { err.textContent = (res.j && res.j.message) || 'Something went wrong. Please try again.'; err.style.display = 'block'; btn.disabled = false; }
+     })
+     .catch(function(){ err.textContent = 'Could not send. Please check your connection and try again.'; err.style.display = 'block'; btn.disabled = false; });
  });
 })();
-//]]></script></body></html>
+/*]]>*/</script>
+</body></html>

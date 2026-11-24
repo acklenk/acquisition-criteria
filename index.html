@@ -35,7 +35,7 @@ textarea{min-height:90px;resize:vertical}
 .money .suf{border-left:1px solid var(--border)}
 .money input{border:0;border-radius:0;box-shadow:none;text-align:right;min-width:0}
 .money input:focus{outline:none}
-.echo{font-size:12.5px;color:var(--muted);margin:-6px 0 12px;min-height:19px}.echo b{color:var(--ink);font-weight:600}
+.echo{font-size:13px;color:var(--ink);margin:-4px 0 12px;padding:7px 10px;border-radius:6px;background:rgba(201,168,76,.16)}.echo b{font-weight:700}
 .sec{border-left:3px solid var(--gold);padding-left:10px;margin:0 0 12px}.sec b{display:block;font-size:15px}.sec span{font-size:12.5px;color:var(--muted)}
 button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}button:disabled{opacity:.6;cursor:default}
 .err{background:rgba(184,92,56,.1);border:1px solid var(--rust);color:#7a3a20;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none}
@@ -79,6 +79,19 @@ button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;paddin
   <li><b>Opportunistic</b> &#8212; Higher risk: distressed assets, heavy repositioning, or significant lease-up.</li>
   <li><b>Lease-Up/Pre-Sale</b> &#8212; Newly built or still leasing up, bought before stabilisation.</li>
  </ul>
+ <h3>Property type</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="exType" value="Garden" /><span>Garden</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Mid-Rise" /><span>Mid-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="High-Rise" /><span>High-Rise</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="BTR" /><span>BTR</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Motel Conversion" /><span>Motel Conversion</span></label>
+  <label class="pill"><input type="checkbox" name="exType" value="Student Housing" /><span>Student Housing</span></label>
+ </div>
+ <h3>Affordable</h3>
+ <div class="pills">
+  <label class="pill"><input type="checkbox" name="exType" value="Affordable" /><span>Affordable</span></label>
+ </div>
  <h3>Size, price and vintage</h3>
  <div class="row"><div class="f"><label class="t">Units &#8212; minimum</label><input type="text" name="unitsMin" inputmode="numeric" placeholder="e.g. 100" /></div>
  <div class="f"><label class="t">Units &#8212; maximum</label><input type="text" name="unitsMax" inputmode="numeric" placeholder="e.g. 400" /></div></div>
@@ -86,19 +99,9 @@ button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;paddin
    <div class="money"><span class="pre">$</span><input type="text" name="priceMinM" inputmode="decimal" placeholder="10" /><span class="suf">million</span></div></div>
   <div class="f"><label class="t">Price &#8212; maximum</label>
    <div class="money"><span class="pre">$</span><input type="text" name="priceMaxM" inputmode="decimal" placeholder="60" /><span class="suf">million</span></div></div></div>
- <div class="echo" id="priceEcho"></div>
+ <div class="echo" id="priceEcho">In millions: type <b>30</b> for $30,000,000, or <b>2.5</b> for $2,500,000.</div>
  <div class="row"><div class="f"><label class="t">Year built &#8212; from</label><input type="text" name="yearMin" inputmode="numeric" placeholder="e.g. 1990" /></div>
  <div class="f"><label class="t">Year built &#8212; to</label><input type="text" name="yearMax" inputmode="numeric" placeholder="e.g. 2025" /></div></div>
- <h3>Property type</h3>
- <div class="pills">
-  <label class="pill"><input type="checkbox" name="exType" value="Garden" /><span>Garden</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="Mid-Rise" /><span>Mid-Rise</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="High-Rise" /><span>High-Rise</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="BTR" /><span>BTR</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="Affordable" /><span>Affordable</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="Motel Conversion" /><span>Motel Conversion</span></label>
-  <label class="pill"><input type="checkbox" name="exType" value="Student Housing" /><span>Student Housing</span></label>
- </div>
  <h3>Markets</h3>
  <div class="mkt">
    <label class="pill"><input type="checkbox" class="mkt-chk" name="exState" value="TN" /><span>Tennessee</span></label>
@@ -143,7 +146,11 @@ button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;paddin
    </div>
  </div>
  <h3>Opportunity Zone</h3>
- <div class="pills"><label class="pill"><input type="checkbox" name="exOZ" value="yes" /><span>Yes</span></label></div>
+ <div class="pills"><label class="pill"><input type="checkbox" name="exOZ" value="yes" /><span>Opportunity Zone</span></label></div>
+ <h3>1031 exchange</h3>
+ <div class="pills"><label class="pill"><input type="checkbox" name="is1031" /><span>I'm in a 1031 exchange</span></label></div>
+ <div class="f" style="max-width:320px"><label class="t">45-day identification end date</label><input type="date" name="deadline1031" /></div>
+ <div class="help">The last day you can identify replacement property.</div>
  <div class="f"><label class="t">Anything else</label><textarea name="exOther" placeholder="Occupancy, upside, deal-breakers, anything that helps me match you."></textarea></div>
 </div>
 
@@ -205,13 +212,8 @@ button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;paddin
    </div>
  </div>
  <h3>Opportunity Zone</h3>
- <div class="pills"><label class="pill"><input type="checkbox" name="laOZ" value="yes" /><span>Yes</span></label></div>
-</div>
-
-<div class="card"><h2>1031 exchange</h2>
- <div class="pills"><label class="pill"><input type="checkbox" name="is1031" /><span>I'm in a 1031 exchange</span></label></div>
- <div class="f" style="max-width:320px"><label class="t">45-day identification end date</label><input type="date" name="deadline1031" /></div>
- <div class="help">The last day you can identify replacement property.</div>
+ <div class="pills"><label class="pill"><input type="checkbox" name="laOZ" value="yes" /><span>Opportunity Zone</span></label></div>
+ <div class="help" style="margin-top:6px">Units, price, year built and the 1031 exchange are in section 1: they do not apply to land.</div>
 </div>
 
 <p><button type="submit" id="send">Send</button></p>
@@ -224,12 +226,19 @@ button{background:var(--gold);color:var(--ink);border:0;border-radius:8px;paddin
  function checks(n){ return Array.prototype.slice.call(f.querySelectorAll('input[name="'+n+'"]:checked')).map(function(x){return x.value;}); }
  function val(n){ var e = f.elements[n]; return e ? String(e.value||'').trim() : ''; }
  function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+ function dollars(v){
+   var t = String(v).replace(/[,$\s]/g,'').replace(/(million|mm|m)$/i,'');
+   if (t === '') return null;
+   if (!/^\d*\.?\d+$/.test(t)) return NaN;
+   var n = Number(t), d = Math.round(n >= 100000 ? n : n * 1e6); return d > 10000000000 ? NaN : d;
+ }
  function echoPrice(){
-   var lo = parseFloat(String(val('priceMinM')).replace(/[^0-9.]/g,'')), hi = parseFloat(String(val('priceMaxM')).replace(/[^0-9.]/g,''));
-   var e = document.getElementById('priceEcho'), out = '';
-   if (!isNaN(lo) && !isNaN(hi)) out = 'That is <b>' + fmt(lo*1e6) + '</b> to <b>' + fmt(hi*1e6) + '</b>.';
-   else if (!isNaN(lo)) out = 'That is <b>' + fmt(lo*1e6) + '</b> and up.';
-   else if (!isNaN(hi)) out = 'Up to <b>' + fmt(hi*1e6) + '</b>.';
+   var lo = dollars(val('priceMinM')), hi = dollars(val('priceMaxM'));
+   var e = document.getElementById('priceEcho'), out = 'In millions: type <b>30</b> for $30,000,000, or <b>2.5</b> for $2,500,000.';
+   if ((lo !== null && isNaN(lo)) || (hi !== null && isNaN(hi))) out = 'Type the price in millions, e.g. <b>30</b> for $30,000,000.';
+   else if (lo !== null && hi !== null) out = 'That is <b>' + fmt(lo) + '</b> to <b>' + fmt(hi) + '</b>.';
+   else if (lo !== null) out = 'That is <b>' + fmt(lo) + '</b> and up.';
+   else if (hi !== null) out = 'Up to <b>' + fmt(hi) + '</b>.';
    e.innerHTML = out;
  }
  f.priceMinM.addEventListener('input', echoPrice); f.priceMaxM.addEventListener('input', echoPrice);
